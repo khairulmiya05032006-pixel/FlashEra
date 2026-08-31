@@ -1,26 +1,60 @@
 import express from "express";
-import ejsMAte from 'ejs-mate';
-import dotenv from 'dotenv';
 import path from 'path';
+import ejsMate from 'ejs-mate';
 import { fileURLToPath } from "url";
-import connectDB from "./config/database.js";
+import mongoose from "mongoose";
+import { uptime } from "process";
+
+//==================================================
+//  1. ENVIRONMENT & PATH INITIALIZATION
+//==================================================
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config();
-
-connectDB();
-
-const port = process.env.PORT || 8080;
 const app = express();
 
+
+//============================================
+// 2. VIEW ENGINE SETUP
+//============================================
+
+//view engine config
+app.engine('ejs', ejsMate);
+app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+// =====================================
+// 3. GLOBAL MIDDLEWARE
+//======================================
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
-app.engine('ejs', ejsMAte);
-app.set('view engine', 'ejs');
+app.use(express.json());
 
+
+//=======================================
+// HEALTH CHECK ENDPOINT
+//=======================================
+
+app.get("/api/health", (req, res) => {
+  const dbStatus = mongoose.connection.readyState === 1 ? 'UP' : 'DOWN';
+
+  const status = dbStatus === 'UP' ? 200 : 503;
+
+  res.status(status).json({
+    status: dbStatus === 'UP' ? 'healthy' : 'Unhealthy',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    services: {
+      database: dbStatus
+    }
+  });
+});
+
+
+//======================================
+//   4. APPLICATION ROUTES
+//======================================
 
 app.get("/", (req, res) => {
   res.send('<h1>Index route</h1>');
@@ -46,6 +80,8 @@ app.get("/home",(req, res) => {
   res.send("This is Meeting")
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http//:localhost:${port}`);
-});
+
+// 5. SERVER LIFE CYCLE CONTROL
+// Export the configured application instance
+
+export default app;

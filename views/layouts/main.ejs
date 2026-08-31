@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>FlashEra || Personal Workspace</title>
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+
+        <div class="app-layout-wrapper">
+            <%- include('../partials/sidebar.ejs') %>
+            <div class="main-container">
+                <main class="sub-container">
+                   <h1>Body Goes here</h1>
+                   <%- body %>
+                </main>
+            </div>
+        </div>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

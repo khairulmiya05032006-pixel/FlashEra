@@ -1,0 +1,488 @@
+*{
+    margin: 0 ;
+    padding: 0 ;
+    box-sizing: border-box ;
+}
+
+:root {
+    /*Brand gradient*/
+    --flash-gradient:linear-gradient(135deg, #00E5D4 0%, #4D7CFF 50%, #7C4DFF 100%);
+    
+    /* Background */
+    --bg-primary:  #0C0E14;
+    --bg-secondary: #050608;
+    --bg-tertiary: #0E1116;
+
+    /* Surfaces */
+    --surface-primary: #151A21;
+    --surface-hover: #1C232C;
+
+    /* Brand */
+    --thunder-yellow: #FFD21F;
+    --thunder-hover: #FFE45C;
+    --thunder-soft: #FFF3A6;
+
+    /* Text */
+    --text-primary: #F5F7FA;
+    --text-secondary: #D1D5DB;
+    --text-muted: #929BA8;
+    --text-placeholder: #626B78;
+
+    /* Borders */
+    --border-primary: #252C35;
+    --border-hover: #3A434F;
+
+    /* Status */
+    --success: #22C55E;
+    --danger: #EF4444;
+    --info: #60A5FA;
+
+    /* Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 14px;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
+
+    /* Typography */
+    --font-primary: 'Inter', sans-serif;
+}
+
+
+.app-layout-wrapper {
+    display: flex;
+    flex-direction: row; 
+    min-height: 100vh;
+    background-color: var(--bg-primary); 
+    width: 100%;
+}
+
+/*------------------HEADER STYLE---------------------------*/
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.header-nav {
+    background-color: rgba(5, 6, 8, 0.9); /* Styled using your --bg-secondary with opacity */
+    border-bottom: 1px solid var(--border-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    height: 72px; /* Set a clean standard fixed height layout */
+    transition: background-color 0.3s ease;
+}
+
+
+.nav-brand-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    transition: all 0.25s ease;
+}
+
+.navbar-brand:hover .logo-box {
+    border-radius: var(--radius-md);
+    border-color: var(--border-hover);
+    background-color: var(--surface-hover);
+}
+
+.navbar-brand img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.brand-text {
+    font-family: var(--font-primary);
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--thunder-yellow);
+}
+
+
+.nav-search-container {
+    flex: 0 1 340px;
+    margin: 0 24px;
+}
+
+.search-form {
+    display: flex;
+    width: 100%;
+}
+
+.search-input-wrapper {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    position: absolute;
+    left: 14px;
+    width: 16px;
+    height: 16px;
+    color: var(--text-placeholder);
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+.search-form input[type="text"] {
+    width: 100%;
+    padding: 10px 16px 10px 40px; /* Offset text to leave room for the inline lens */
+    background-color: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-right: none;
+    border-top-left-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.search-form input[type="text"]::placeholder {
+    color: var(--text-placeholder);
+}
+
+/* Visual states on element focusing */
+.search-form:focus-within .search-icon {
+    color: var(--info); /* Light up icon to indicate active state */
+}
+
+.search-form input[type="text"]:focus {
+    background-color: var(--surface-hover);
+    border-color: var(--border-hover);
+}
+
+.search-submit-btn {
+    padding: 0 20px;
+    background-color: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-top-right-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-family: var(--font-primary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.search-form:focus-within .search-submit-btn {
+    border-color: var(--border-hover);
+    background-color: var(--surface-hover);
+}
+
+.search-submit-btn:hover {
+    background-color: var(--border-primary) !important;
+    color: var(--text-primary);
+}
+
+
+.nav-auth-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-auth-actions a {
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+/* Sleek Muted Text Button style for login link */
+.link-login {
+    color: var(--text-secondary);
+    padding: 10px 16px;
+    border-radius: var(--radius-md);
+}
+
+.link-login:hover {
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.03); /* Tiny subtle surface hover */
+}
+
+/* High Contrast Signature Thunder-Yellow Sign Up Callout */
+.btn-signup-premium {
+    background-color: var(--thunder-yellow);
+    color: var(--bg-secondary); /* Dark text on bright element protects accessibility readability */
+    padding: 10px 22px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-signup-premium:hover {
+    background-color: var(--thunder-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 210, 31, 0.2); /* Custom micro glowing accent */
+}
+
+.btn-signup-premium:active {
+    transform: translateY(0);
+}
+
+
+
+
+
+
+/*-----------------------SIDEBAR STYLE-----------------------------*/
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    padding: 2rem 1rem;
+    width: 250px;           
+    flex-shrink: 0;         
+}
+
+
+.sidebar-nav-container {
+    background-color: var(--bg-secondary);
+    color: white;
+    border-radius: 1.5rem;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;             
+}
+.nav-list li, a{
+    text-decoration: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.nav-list{
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+.nav-list li{
+    border: 1px solid var(--border-primary);
+    border-radius: 1rem;
+    padding: .45rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: .45rem 0;
+}
+
+.nav-list a {
+    color: white;
+}
+
+.main-container {
+    flex-grow: 1;          
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.profile-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: .46rem 1rem;
+    border: 1px solid var(--border-primary);
+    border-radius: 1rem;
+    position: absolute;
+    left: 1rem;
+    bottom: -2rem;
+    cursor: pointer;
+}
+.profile-image{
+    height: 40px;
+    width: 40px;
+    flex-shrink: 0;
+}
+
+.profile-image > img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+
+
+
+
+
+/*----------------------------------FOOTER STYLE---------------------------*/
+
+/* --- FLASH_ERA HIGH-GRADE FOOTER --- */
+.site-footer {
+    width: 100%;
+    background-color: var(--bg-secondary); /* Matches navbar dark theme depth exactly */
+    border-top: 1px solid var(--border-primary);
+    color: var(--text-secondary);
+    font-family: var(--font-primary);
+    padding: 60px 0 20px 0;
+    margin-top: auto; /* Clean layout tracking for sticky wrapper positioning push */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap; /* Gracefully breaks rows down cleanly onto tablet viewpoints */
+}
+
+/* Brand block styling rules */
+.footer-brand-section {
+    flex: 1 1 320px; /* Gives description box more visual real estate width presence */
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.footer-logo img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.footer-logo span {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+}
+
+.footer-tagline {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+/* Right layout functional mapping grids */
+.footer-links-grid {
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.footer-link-group {
+    min-width: 120px;
+}
+
+.footer-link-group h4 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-primary);
+    margin-bottom: 18px;
+}
+
+.footer-link-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-link-group li {
+    margin-bottom: 10px;
+}
+
+.footer-link-group a {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+/* Interactive link hovers use your signature thunder-yellow */
+.footer-link-group a:hover {
+    color: var(--thunder-yellow);
+}
+
+
+/* --- BOTTOM BAR & COMPLIANCE SECTION --- */
+.footer-bottom {
+    margin-top: 50px;
+    border-top: 1px solid var(--border-primary);
+    padding-top: 24px;
+}
+
+.footer-bottom-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--text-placeholder);
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+/* Micro interaction layer details for developer icons */
+.footer-socials a {
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.footer-socials a:hover {
+    color: var(--text-primary);
+    transform: translateY(-1.5px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
